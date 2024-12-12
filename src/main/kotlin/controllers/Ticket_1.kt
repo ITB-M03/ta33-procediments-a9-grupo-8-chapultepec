@@ -45,7 +45,8 @@ fun menu(scan : Scanner) : Int {
         1. TCasual 
         2. TUsual
         3. TFamiliar
-        4. TJove
+        4. TJove 
+        
     """.trimIndent())
     opciones = pedirNumerito("Digame la opcion del billete que desea: ", scan)
 
@@ -63,8 +64,17 @@ fun menu(scan : Scanner) : Int {
 fun elegirZona(listabilletes: MutableList<billetes>, scan : Scanner, opciones : Int) : Int {
     var opcionZona : Int
 
+    mostrarMensajeSinSalto("""
+        --------------------------
+        Las zonas a eleguir son: 
+        1. Zona 1 
+        2. Zona 2
+        3. Zona 3
+        
+    """.trimIndent())
     opcionZona = pedirNumerito("A que zona le gustaría viajar? ", scan)
-    mostrarPrecio(listabilletes, opcionZona, opciones)
+    mostrarBillete(listabilletes, opcionZona, opciones)
+    scan.nextLine()
     buclePedirMasBilletes(scan, listabilletes, opciones, opcionZona)
 
     return opcionZona
@@ -85,7 +95,7 @@ fun buclePedirMasBilletes(scan : Scanner, listabilletes: MutableList<billetes>, 
     var precioActual : Double = 0.0
 
     while (contador < 3){
-        siONo = leerLinea("Le gustaría seguir comprando? ",scan).uppercase()
+        siONo = leerLinea("Le gustaría seguir comprando?[S/N] ",scan).uppercase()
         if(siONo == "S"){
             precioActual += buscarPrecio(listabilletes, opciones, opcionesZone)
             var opciones2 = menu(scan)
@@ -95,7 +105,7 @@ fun buclePedirMasBilletes(scan : Scanner, listabilletes: MutableList<billetes>, 
         else if(siONo == "N"){
             contador = 3
         }
-    }
+        else printlnMSG("Esto no es una opción válida")    }
     return precioActual
 }
 
@@ -134,15 +144,15 @@ fun buscarPrecio(listabilletes: MutableList<billetes>, opcionZone : Int, opcione
  * @param opcionZona -> Zona seleccionada por el usuario.
  * @param opciones -> Opción del billete seleccionada por el usuario.
  */
-fun mostrarPrecio(listabilletes: MutableList<billetes>, opcionZona : Int, opciones : Int){
-    var tipoBillete = listabilletes[opciones]
+fun mostrarBillete(listabilletes: MutableList<billetes>, opcionZona : Int, opciones : Int){
+    var tipoBillete = listabilletes[opciones].billete
 
-    println("Usted ha elegido ${tipoBillete}, $opcionZona")
+    println("Usted ha elegido $tipoBillete, Zona $opcionZona")
 }
 
 /**
- * @author Angel Sardinha
  * Bucle principal para la interacción con el usuario.
+ * @author Angel Sardinha
  * @param listabilletes -> Lista mutable de billetes disponibles.
  * @param scan -> Instancia de Scanner para leer la entrada del usuario.
  */
@@ -157,9 +167,9 @@ fun bucle(listabilletes: MutableList<billetes>, scan : Scanner){
 }
 
 /**
- * @author Angel Sardinha
  * Punto de entrada principal del programa.
  * Inicializa el scanner y la lista de billetes y ejecuta el bucle principal.
+ * @author Angel Sardinha
  */
 fun main() {
     val scan = abrirScanner()
