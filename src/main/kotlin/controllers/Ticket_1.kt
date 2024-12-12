@@ -4,11 +4,9 @@ import java.util.Scanner
 
 /**
  * Representa los billetes disponibles con su nombre y precio.
- *
- * @param billete Nombre del billete.
- * @param precio Precio del billete.
- *
  * @author Angel Sardinha
+ * @param billete -> Nombre del billete.
+ * @param precio -> Precio del billete.
  */
 data class billetes(
     val billete : String,
