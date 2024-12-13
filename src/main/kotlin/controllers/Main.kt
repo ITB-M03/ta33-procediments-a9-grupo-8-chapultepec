@@ -1,8 +1,15 @@
 package org.example.controllers
 import utilities.*
+import java.text.DecimalFormat
 import java.util.Scanner
 
-var dineroExistentes = listOf(0.05, 0.10, 0.20, 0.50, 1.0, 2.0, 5.0, 10.0, 20.0, 50.0 )
+var dineroExistentes = listOf(0.05, 0.10, 0.20, 0.50, 1.0, 2.0, 5.0, 10.0, 20.0, 50.0, 100.0, 200.0, 500.0)
+
+var billetesSeleccionados = mutableListOf<String>()
+var precioBilletesSeleccionados = mutableListOf<Double>()
+var precioFinal =0.0
+var contador = 0
+
 
 /**
  * Representa los billetes disponibles con su nombre y precio.
@@ -14,6 +21,41 @@ data class billetes(
     val billete : String,
     val precio : Double
 )
+
+
+/**
+ * Punto de entrada principal del programa.
+ * Inicializa el scanner y la lista de billetes y ejecuta el bucle principal.
+ * @author Angel Sardinha
+ */
+fun main() {
+    val scan = abrirScanner()
+    val listaBilletes = definirLista()
+    startProgram(listaBilletes, scan)
+    cerrarScanner(scan)
+}
+
+/**
+ * Bucle principal para la interacción con el usuario.
+ * @author Angel Sardinha
+ * @param listabilletes -> Lista mutable de billetes disponibles.
+ * @param scan -> Instancia de Scanner para leer la entrada del usuario.
+ */
+fun startProgram(listabilletes: MutableList<billetes>, scan : Scanner){
+    var num = 0
+    val password = 4321
+    var precioTotal : Double = 0.0
+    var seguir = true
+
+    while(seguir == true && contador<3){
+        var billete = menu(scan) // Pedir tipo Billete
+        var zona = elegirZona(listabilletes, scan, billete) //Pedir zona de billete
+        precioTotal += buscarPrecio(listabilletes, zona, billete) //Calcular Precio
+        seguir = masBilletes(scan) //Quieres mas billetes?
+    }
+    precioFinal = precioTotal //Almacenamos para el tiquet
+    procederPago(scan, precioTotal)
+}
 
 /**
  * Define una lista mutable de billetes con sus precios iniciales.
@@ -56,7 +98,7 @@ fun menu(scan : Scanner) : Int {
 }
 
 /**
- * Permite al usuario elegir una zona y muestra el precio del billete seleccionado.
+ * Permite al usuario elegir una zona para el billete seleccionado
  * @author Angel Sardinha
  * @param listabilletes -> Lista mutable de billetes disponibles.
  * @param scan -> Instancia de Scanner para leer la entrada del usuario.
@@ -82,33 +124,25 @@ fun elegirZona(listabilletes: MutableList<billetes>, scan : Scanner, opciones : 
 }
 
 /**
- * Permite al usuario comprar billetes adicionales en un bucle hasta un máximo de tres intentos.
- * @author Angel Sardinha
- * @param scan -> Instancia de Scanner para leer la entrada del usuario.
- * @param listabilletes -> Lista mutable de billetes disponibles.
- * @param opciones -> Opción del billete seleccionada por el usuario.
- * @param opcionesZone -> Zona seleccionada por el usuario.
- * @return El precio acumulado de los billetes comprados como un valor Double.
+ * Pregunra a, usuario si quiere comprar mas billetes.
+ * @author Angel Sardinha & Iván Salamanca
+ * @param scan --> Instancia de Scanner para leer la entrada del usuario.
+ * @return --> devuelve si quier mas billetes o no
  */
-fun buclePedirMasBilletes(scan : Scanner, listabilletes: MutableList<billetes>, opciones: Int, opcionesZone : Int, precioInicial : Double) : Double {
-    var contador = 0
+fun masBilletes(scan : Scanner, ) : Boolean {
     var siONo : String
-    var precioActual = precioInicial
-
-    while (contador < 3){
-        siONo = leerLinea("Le gustaría seguir comprando?[S/N] ",scan).uppercase()
-        if(siONo == "S"){
-            precioActual += buscarPrecio(listabilletes, opciones, opcionesZone)
-            var opciones2 = menu(scan)
-            elegirZona(listabilletes, scan, opciones2)
-            contador++
-        }
-        else if(siONo == "N"){
-            contador = 3
-        }
-        else printlnMSG("Esto no es una opción válida")    }
-
-    return precioActual
+    var result = false
+    // Obtener info teclado
+    siONo = leerLinea("Le gustaría seguir comprando?[S/N] ",scan).uppercase()
+    //analisis data recibido
+    if(siONo == "S"){
+        result = true
+    }
+    else if(siONo == "N"){
+         result = false
+    }
+    else printlnMSG("Esto no es una opción válida")
+    return result
 }
 
 /**
@@ -116,31 +150,35 @@ fun buclePedirMasBilletes(scan : Scanner, listabilletes: MutableList<billetes>, 
  * @author Angel Sardinha
  * @param listabilletes -> Lista mutable de billetes disponibles.
  * @param opcionZone -> Zona seleccionada por el usuario.
- * @param opciones -> Opción del billete seleccionada por el usuario.
+ * @param opcionesTargeta -> Opción del billete seleccionada por el usuario.
  * @return El precio del billete ajustado por zona como un valor Double.
  */
-fun buscarPrecio(listabilletes: MutableList<billetes>, opcionZone : Int, opciones : Int) : Double{
+fun buscarPrecio(listabilletes: MutableList<billetes>, opcionZone : Int, opcionesTargeta : Int) : Double{
     var precioNuevo : Double
-    var indice = opciones
+    var indice = opcionesTargeta
+    // Valor a multiplicar por cada zona
     var zonaDos = 1.3125
     var zonaTres = 1.8443
-    var dos = 2
-    var tres = 3
+    var DOS = 2
+    var TRES = 3
 
+    //Calculo
     precioNuevo = listabilletes[indice].precio
-    if(opcionZone == dos){
+    if(opcionZone == DOS){//para zona 2
         precioNuevo *= zonaDos
     }
-    else if(opcionZone == tres){
+    else if(opcionZone == TRES){ // Para zona 3
         precioNuevo *= zonaTres
     }
-    else precioNuevo = precioNuevo
+    else precioNuevo = precioNuevo // Para zona 1
+    precioBilletesSeleccionados.add(precioNuevo) // Guardamos para el tiket
+    contador++
 
     return precioNuevo
 }
 
 /**
- * Muestra el precio del billete y la zona seleccionada.
+ * Muestra el billete y la zona seleccionada.
  * @author Angel Sardinha
  * @param listabilletes -> Lista mutable de billetes disponibles.
  * @param opcionZona -> Zona seleccionada por el usuario.
@@ -148,84 +186,114 @@ fun buscarPrecio(listabilletes: MutableList<billetes>, opcionZone : Int, opcione
  */
 fun mostrarBillete(listabilletes: MutableList<billetes>, opcionZona : Int, opciones : Int){
     var tipoBillete = listabilletes[opciones].billete
-
+    billetesSeleccionados.add("$tipoBillete - Zona $opcionZona")// Guardamos para el tiket
     println("Usted ha elegido $tipoBillete, Zona $opcionZona")
 }
 
-/**
- * Bucle principal para la interacción con el usuario.
- * @author Angel Sardinha
- * @param listabilletes -> Lista mutable de billetes disponibles.
- * @param scan -> Instancia de Scanner para leer la entrada del usuario.
- */
-fun bucle(listabilletes: MutableList<billetes>, scan : Scanner){
-    var num = 0
-    val password = 4321
-    var precioTotal : Double
 
-    while(num != password){
-        var opcion = menu(scan)
-        var zona = elegirZona(listabilletes, scan, opcion)
-        precioTotal = buscarPrecio(listabilletes, zona, opcion)
-        precioTotal = buclePedirMasBilletes(scan, listabilletes, opcion, zona, precioTotal)
-        restarPrecio(scan, precioTotal)
-    }
-}
-
-/**
- * Punto de entrada principal del programa.
- * Inicializa el scanner y la lista de billetes y ejecuta el bucle principal.
- * @author Angel Sardinha
- */
-fun main() {
-    val scan = abrirScanner()
-
-    val listaBilletes = definirLista()
-
-    bucle(listaBilletes, scan)
-
-    cerrarScanner(scan)
-}
 
 
 /**
- * Pedir y comprobar el importe que entra si esta en la lista de cash
+ * Pedir y comprobar el importe que entra si esta en la lista de monedas y billetes acceptados
  * @author Iván Salamanca
  * @param scan --> Herramienta que nos permite escanear el numero
- * @return el valor Obteidp despues de comprobarse.
+ * @return --> El valor Obteidp despues de comprobarse.
  */
-fun pedirCash(scan:Scanner) : Double {
-    var dineros = 0.0
-    var result = pedirNumeritoDouble("Introduzca un billete o modeda: ", scan)
-    for (x in 0 until dineroExistentes.size) {
-        if (dineroExistentes[x]== result) dineros = result
-    }
-    if (dineros == 0.0) {
-        printlnMSG("No ha introducido un billete o moneda legal en España")
-        pedirCash(scan)
-    }
-    return dineros
+fun pedirCash(scan: Scanner): Double {
+    var result: Double
+    var isValid = false
+
+    // Repetir hasta que se introduzca un billete o moneda válida
+    do {
+        result = pedirNumeritoDouble("Introduzca un billete o moneda: ", scan)
+
+        // Verificar si el valor está en la lista de billetes o monedas válidos
+        if (dineroExistentes.contains(result)) {
+            isValid = true
+        } else {
+            printlnMSG("No ha introducido un billete o moneda legal en España")
+            printlnMSG("Estas son las opciones: ${dineroExistentes}")
+        }
+    } while (isValid == false)
+
+    return result
 }
 
-fun restarPrecio (scan: Scanner, precio: Double) {
+/**
+ * Inicio del pago donde se gestiona el pago en si, el tiquet y el cambio
+ * @author Iván Salamanca
+ * @param scan --> Permite escanear los billetes y las respuestas de el usuario
+ * @param precio --> Es el precio a pagar que ira descendiendo
+ */
+fun procederPago (scan: Scanner, precio: Double) {
     var precioRestante = precio
+    // Se ejecuta hasta que quede todo pagado
+    printlnMSG("*----------------------------Pago----------------------------*")
     while (precioRestante > 0.0) {
-        printlnMSG("Su importe a pagar es de $precioRestante")
+        printlnMSG("Su importe a pagar es de ${imprimirPrecio(precioRestante)} €")
         var cash = pedirCash(scan)
-        precioRestante = restaDosElemetosDouble(precio,cash)
+        precioRestante = restaDosElemetosDouble(precioRestante,cash)
     }
-    gestionCambio(precioRestante)
+    gestionCambio(precioRestante)//se gestiona el cambio en caso de que haya o muestra 0.00
+    tiquetQuieres(scan) // Preguntar si quiere tiquet e imprimirlo en caso Si
+    //vaciado billetes antiguos
+    billetesSeleccionados.clear()
+    precioBilletesSeleccionados.clear()
     printlnMSG("Disfruta de tu viaje, si el tren llega claro ;)")
 }
 
-
+/**
+ * Gestiona el cambio en caso de que se necesite devolver algo y se mosrtaria el resultado
+ * @author Iván Salamanca
+ * @param precioRestante --> Este precio o bien es 0.0 o tiene el resultado del cambio
+ */
 fun gestionCambio (precioRestante: Double){
     var precio = precioRestante
     if (precio < 0.0) {
         precio = precio * -1
     }
-    printlnMSG("Su cambio es de : $precio")
+    printlnMSG("Su cambio es de : ${imprimirPrecio(precio)} €")
 
 }
 
+/**
+ * Pregunta al usuario si quiere iimprimir el tiquet
+ * @author Iván Salamanca
+ * @param scan -> Nos permite leer la respuesta del usuario
+ */
+fun tiquetQuieres(scan:Scanner){
+    var tiquetSiNo : String
+    scan.nextLine()
+    tiquetSiNo = leerLinea("Le gustaría Recibir el tiket?[S/N] ",scan).uppercase()
+    if (tiquetSiNo == "S"){
+        imprimirTiquet()
+    }
 
+}
+
+/**
+ * Imprime el tiquet completo con los datos que se han ido guardando durante el programa
+ * @author Iván Salamanca
+ */
+fun imprimirTiquet(){
+    printlnMSG("*--------------------* Su Tiquet *--------------------*")
+    for (x in 0 until  billetesSeleccionados.size){
+        mostrarMensajeSinSalto("    ${billetesSeleccionados[x]}")
+        mostrarMensajeSinSalto("  Precio: ${imprimirPrecio(precioBilletesSeleccionados[x])}€")
+        printlnMSG("")
+    }
+    printlnMSG("*-----------------------------------------------------*")
+    printlnMSG("         Importe total ---> ${imprimirPrecio(precioFinal)}€")
+    printlnMSG("*-----------------------------------------------------*")
+}
+
+/**
+ * Esto nos permite imprimir los precios que son decimales solo con dos numeros decimaoes y no tropecientos
+ * @author Iván Salamanca
+ * @param precio --> Es el precio que hay que acortar
+ * @return --> Devuelve el numero a modo de string para imprimir por pantlla
+ */
+fun imprimirPrecio(precio: Double): String{
+    val df = DecimalFormat("0.00")
+    return df.format(precio)
+}

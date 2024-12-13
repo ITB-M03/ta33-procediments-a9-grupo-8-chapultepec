@@ -1,0 +1,48 @@
+$dokka.format:html-v1
+$dokka.linkExtension:html
+$dokka.location:interfaces////PointingToDeclaration/-git-hub-classroom-template/interfaces/index.html
+$dokka.location:interfaces/MyInterface///PointingToDeclaration/-git-hub-classroom-template/interfaces/-my-interface/index.html
+$dokka.location:models////PointingToDeclaration/-git-hub-classroom-template/models/index.html
+$dokka.location:models/MyModel///PointingToDeclaration/-git-hub-classroom-template/models/-my-model/index.html
+$dokka.location:models/MyModel/MyModel/#/PointingToDeclaration/-git-hub-classroom-template/models/-my-model/-my-model.html
+$dokka.location:models/MyModel/function/#/PointingToDeclaration/-git-hub-classroom-template/models/-my-model/function.html
+$dokka.location:org.example.controllers////PointingToDeclaration/-git-hub-classroom-template/org.example.controllers/index.html
+$dokka.location:org.example.controllers/MainKt///PointingToDeclaration/-git-hub-classroom-template/org.example.controllers/-main-kt/index.html
+$dokka.location:org.example.controllers/MainKt/bucle/#kotlin.collections.MutableList[org.example.controllers.billetes]#java.util.Scanner/PointingToDeclaration/-git-hub-classroom-template/org.example.controllers/-main-kt/bucle.html
+$dokka.location:org.example.controllers/MainKt/buclePedirMasBilletes/#java.util.Scanner#kotlin.collections.MutableList[org.example.controllers.billetes]#kotlin.Int#kotlin.Int#kotlin.Double/PointingToDeclaration/-git-hub-classroom-template/org.example.controllers/-main-kt/bucle-pedir-mas-billetes.html
+$dokka.location:org.example.controllers/MainKt/buscarPrecio/#kotlin.collections.MutableList[org.example.controllers.billetes]#kotlin.Int#kotlin.Int/PointingToDeclaration/-git-hub-classroom-template/org.example.controllers/-main-kt/buscar-precio.html
+$dokka.location:org.example.controllers/MainKt/definirLista/#/PointingToDeclaration/-git-hub-classroom-template/org.example.controllers/-main-kt/definir-lista.html
+$dokka.location:org.example.controllers/MainKt/elegirZona/#kotlin.collections.MutableList[org.example.controllers.billetes]#java.util.Scanner#kotlin.Int/PointingToDeclaration/-git-hub-classroom-template/org.example.controllers/-main-kt/elegir-zona.html
+$dokka.location:org.example.controllers/MainKt/gestionCambio/#kotlin.Double/PointingToDeclaration/-git-hub-classroom-template/org.example.controllers/-main-kt/gestion-cambio.html
+$dokka.location:org.example.controllers/MainKt/getBilletesSeleccionados/#/PointingToDeclaration/-git-hub-classroom-template/org.example.controllers/-main-kt/get-billetes-seleccionados.html
+$dokka.location:org.example.controllers/MainKt/getDineroExistentes/#/PointingToDeclaration/-git-hub-classroom-template/org.example.controllers/-main-kt/get-dinero-existentes.html
+$dokka.location:org.example.controllers/MainKt/imprimirTiquet/#/PointingToDeclaration/-git-hub-classroom-template/org.example.controllers/-main-kt/imprimir-tiquet.html
+$dokka.location:org.example.controllers/MainKt/main/#/PointingToDeclaration/-git-hub-classroom-template/org.example.controllers/-main-kt/main.html
+$dokka.location:org.example.controllers/MainKt/menu/#java.util.Scanner/PointingToDeclaration/-git-hub-classroom-template/org.example.controllers/-main-kt/menu.html
+$dokka.location:org.example.controllers/MainKt/mostrarBillete/#kotlin.collections.MutableList[org.example.controllers.billetes]#kotlin.Int#kotlin.Int/PointingToDeclaration/-git-hub-classroom-template/org.example.controllers/-main-kt/mostrar-billete.html
+$dokka.location:org.example.controllers/MainKt/pedirCash/#java.util.Scanner/PointingToDeclaration/-git-hub-classroom-template/org.example.controllers/-main-kt/pedir-cash.html
+$dokka.location:org.example.controllers/MainKt/restarPrecio/#java.util.Scanner#kotlin.Double/PointingToDeclaration/-git-hub-classroom-template/org.example.controllers/-main-kt/restar-precio.html
+$dokka.location:org.example.controllers/MainKt/setBilletesSeleccionados/#kotlin.collections.MutableList[kotlin.String]/PointingToDeclaration/-git-hub-classroom-template/org.example.controllers/-main-kt/set-billetes-seleccionados.html
+$dokka.location:org.example.controllers/MainKt/setDineroExistentes/#kotlin.collections.List[kotlin.Double]/PointingToDeclaration/-git-hub-classroom-template/org.example.controllers/-main-kt/set-dinero-existentes.html
+$dokka.location:org.example.controllers/MainKt/tiquetQuieres/#java.util.Scanner/PointingToDeclaration/-git-hub-classroom-template/org.example.controllers/-main-kt/tiquet-quieres.html
+$dokka.location:org.example.controllers/billetes///PointingToDeclaration/-git-hub-classroom-template/org.example.controllers/billetes/index.html
+$dokka.location:org.example.controllers/billetes/billetes/#kotlin.String#kotlin.Double/PointingToDeclaration/-git-hub-classroom-template/org.example.controllers/billetes/billetes.html
+$dokka.location:org.example.controllers/billetes/getBillete/#/PointingToDeclaration/-git-hub-classroom-template/org.example.controllers/billetes/get-billete.html
+$dokka.location:org.example.controllers/billetes/getPrecio/#/PointingToDeclaration/-git-hub-classroom-template/org.example.controllers/billetes/get-precio.html
+$dokka.location:utilities////PointingToDeclaration/-git-hub-classroom-template/utilities/index.html
+$dokka.location:utilities/MyUtilsKt///PointingToDeclaration/-git-hub-classroom-template/utilities/-my-utils-kt/index.html
+$dokka.location:utilities/MyUtilsKt/abrirScanner/#/PointingToDeclaration/-git-hub-classroom-template/utilities/-my-utils-kt/abrir-scanner.html
+$dokka.location:utilities/MyUtilsKt/cerrarScanner/#java.util.Scanner/PointingToDeclaration/-git-hub-classroom-template/utilities/-my-utils-kt/cerrar-scanner.html
+$dokka.location:utilities/MyUtilsKt/leerInt/#kotlin.String#java.util.Scanner/PointingToDeclaration/-git-hub-classroom-template/utilities/-my-utils-kt/leer-int.html
+$dokka.location:utilities/MyUtilsKt/leerLinea/#kotlin.String#java.util.Scanner/PointingToDeclaration/-git-hub-classroom-template/utilities/-my-utils-kt/leer-linea.html
+$dokka.location:utilities/MyUtilsKt/mostrarMensajeSinSalto/#kotlin.String/PointingToDeclaration/-git-hub-classroom-template/utilities/-my-utils-kt/mostrar-mensaje-sin-salto.html
+$dokka.location:utilities/MyUtilsKt/pedirNumerito/#kotlin.String#java.util.Scanner/PointingToDeclaration/-git-hub-classroom-template/utilities/-my-utils-kt/pedir-numerito.html
+$dokka.location:utilities/MyUtilsKt/pedirNumeritoDouble/#kotlin.String#java.util.Scanner/PointingToDeclaration/-git-hub-classroom-template/utilities/-my-utils-kt/pedir-numerito-double.html
+$dokka.location:utilities/MyUtilsKt/printlnMSG/#kotlin.String/PointingToDeclaration/-git-hub-classroom-template/utilities/-my-utils-kt/println-m-s-g.html
+$dokka.location:utilities/MyUtilsKt/restaDosElemetosDouble/#kotlin.Double#kotlin.Double/PointingToDeclaration/-git-hub-classroom-template/utilities/-my-utils-kt/resta-dos-elemetos-double.html
+$dokka.location:utilities/MyUtilsKt/showResulString/#kotlin.String#kotlin.String/PointingToDeclaration/-git-hub-classroom-template/utilities/-my-utils-kt/show-resul-string.html
+interfaces
+models
+org.example.controllers
+utilities
+
