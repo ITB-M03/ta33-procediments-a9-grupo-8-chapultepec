@@ -1,4 +1,5 @@
 package utilities
+import java.text.DecimalFormat
 import java.util.*
 
 /**
@@ -110,4 +111,15 @@ fun restaDosElemetosDouble (num1: Double, num2:Double): Double{
     var result = 0.0
     result = num1-num2
     return result
+}
+
+/**
+ * Esto nos permite imprimir los precios que son decimales solo con dos numeros decimaoes y no tropecientos
+ * @author Iván Salamanca
+ * @param numeroDouble --> Es el numeeo que hay que acortar
+ * @return --> Devuelve el numero a modo de string para imprimir por pantlla
+ */
+fun imprimirDosDecimales(numeroDouble: Double): String{
+    val df = DecimalFormat("0.00")
+    return df.format(numeroDouble)
 }
