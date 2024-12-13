@@ -105,3 +105,9 @@ fun pedirNumeritoDouble ( msg: String, scan: Scanner): Double {
     resultado = scan.nextDouble()
     return resultado
 }
+
+fun restaDosElemetosDouble (num1: Double, num2:Double): Double{
+    var result = 0.0
+    result = num1-num2
+    return result
+}
